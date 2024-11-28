@@ -9,6 +9,11 @@ Globals:
   Function:
     Timeout: 5
     MemorySize: 128
+  Api:
+    Cors:
+      AllowMethods: "'GET,POST,OPTIONS'"
+      AllowHeaders: "'content-type'"
+      AllowOrigin: "'*'"
 
 Resources:
   AjayPatelApiGateway:
@@ -21,12 +26,12 @@ Resources:
         EndpointConfiguration: EDGE
         Route53:
           HostedZoneId: Z0502293H5TZC2PJ9FFH
-      Cors:
-        AllowMethods: "'POST,GET'"
-        AllowHeaders: "'X-Forwarded-For,Content-Type'"
-        AllowOrigin: "'https://ajaypatel.live'"
-        MaxAge: "'600'"
-        AllowCredentials: true
+      # Cors:
+      #   AllowMethods: "'POST,GET'"
+      #   AllowHeaders: "'X-Forwarded-For,Content-Type'"
+      #   AllowOrigin: "'https://ajaypatel.live'"
+      #   MaxAge: "'600'"
+      #   AllowCredentials: true
 
   AjayPatelFunction:
     Type: AWS::Serverless::Function
