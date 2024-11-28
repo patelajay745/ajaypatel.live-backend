@@ -22,8 +22,8 @@ Resources:
         Route53:
           HostedZoneId: Z0502293H5TZC2PJ9FFH
       Cors:
-        AllowMethods: "'POST, GET'"
-        AllowHeaders: "'X-Forwarded-For, Content-Type'"
+        AllowMethods: "'POST,GET'"
+        AllowHeaders: "'X-Forwarded-For'"
         AllowOrigin: "'https://ajaypatel.live'"
         MaxAge: "'600'"
         AllowCredentials: true

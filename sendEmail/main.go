@@ -35,22 +35,29 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 		return events.APIGatewayProxyResponse{
 			StatusCode: 400,
 			Body:       "Error parsing form data",
+			Headers: map[string]string{
+				"Access-Control-Allow-Headers": "Content-Type",
+				"Access-Control-Allow-Origin":  "https://ajaypatel.live",
+				"Access-Control-Allow-Methods": "POST, GET",
+			},
 		}, err
 	}
 
-	if values.Get("firstName") == "" || 
-       values.Get("lastName") == "" || 
-       values.Get("email") == "" || 
-       values.Get("subject") == "" || 
-       values.Get("message") == "" {
-        return events.APIGatewayProxyResponse{
-            StatusCode: 400,
-            Body:       "Please provide all required fields",
-            Headers: map[string]string{
-                "Content-Type": "application/json",
-            },
-        }, nil
-    }
+	if values.Get("firstName") == "" ||
+		values.Get("lastName") == "" ||
+		values.Get("email") == "" ||
+		values.Get("subject") == "" ||
+		values.Get("message") == "" {
+		return events.APIGatewayProxyResponse{
+			StatusCode: 400,
+			Body:       "Please provide all required fields",
+			Headers: map[string]string{
+				"Access-Control-Allow-Headers": "Content-Type",
+				"Access-Control-Allow-Origin":  "https://ajaypatel.live",
+				"Access-Control-Allow-Methods": "POST, GET",
+			},
+		}, nil
+	}
 
 	input := &ses.SendEmailInput{
 		Destination: &types.Destination{
@@ -80,6 +87,11 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 		return events.APIGatewayProxyResponse{
 			StatusCode: 500,
 			Body:       "Error sending email",
+			Headers: map[string]string{
+				"Access-Control-Allow-Headers": "Content-Type",
+				"Access-Control-Allow-Origin":  "https://ajaypatel.live",
+				"Access-Control-Allow-Methods": "POST, GET",
+			},
 		}, err
 	}
 	fmt.Println("Email sent! Message ID:", result.MessageId)
@@ -87,6 +99,11 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 	return events.APIGatewayProxyResponse{
 		Body:       "Email sent",
 		StatusCode: 200,
+		Headers: map[string]string{
+			"Access-Control-Allow-Headers": "Content-Type",
+			"Access-Control-Allow-Origin":  "https://ajaypatel.live",
+			"Access-Control-Allow-Methods": "POST, GET",
+		},
 	}, nil
 }
 
