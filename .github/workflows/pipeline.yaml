@@ -17,4 +17,4 @@ jobs:
 
       - run: sam build
 
-      - run: sam deploy --no-confirm-changeset
+      - run: sam deploy --no-confirm-changeset --region ${{ secrets.AWS_region }}
