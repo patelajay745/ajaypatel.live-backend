@@ -37,7 +37,7 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 			Body:       "Error parsing form data",
 			Headers: map[string]string{
 				"Access-Control-Allow-Headers": "Content-Type",
-				"Access-Control-Allow-Origin":  "*",
+				"Access-Control-Allow-Origin":  "https://ajaypatel.live",
 				"Access-Control-Allow-Methods": "POST",
 			},
 		}, err
@@ -53,7 +53,7 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 			Body:       "Please provide all required fields",
 			Headers: map[string]string{
 				"Access-Control-Allow-Headers": "Content-Type",
-				"Access-Control-Allow-Origin":  "*",
+				"Access-Control-Allow-Origin":  "https://ajaypatel.live",
 				"Access-Control-Allow-Methods": "POST",
 			},
 		}, nil
@@ -91,7 +91,7 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 			Body:       "Error sending email",
 			Headers: map[string]string{
 				"Access-Control-Allow-Headers": "Content-Type",
-				"Access-Control-Allow-Origin":  "*",
+				"Access-Control-Allow-Origin":  "https://ajaypatel.live",
 				"Access-Control-Allow-Methods": "POST",
 			},
 		}, err
@@ -103,7 +103,7 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 		StatusCode: 200,
 		Headers: map[string]string{
 			"Access-Control-Allow-Headers": "Content-Type",
-			"Access-Control-Allow-Origin":  "*",
+			"Access-Control-Allow-Origin":  "https://ajaypatel.live",
 			"Access-Control-Allow-Methods": "POST",
 		},
 	}, nil
