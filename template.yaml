@@ -23,7 +23,7 @@ Resources:
           HostedZoneId: Z0502293H5TZC2PJ9FFH
       Cors:
         AllowMethods: "'POST,GET'"
-        AllowHeaders: "'X-Forwarded-For'"
+        AllowHeaders: "'X-Forwarded-For,Content-Type'"
         AllowOrigin: "'https://ajaypatel.live'"
         MaxAge: "'600'"
         AllowCredentials: true
