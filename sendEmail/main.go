@@ -59,6 +59,8 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 		}, nil
 	}
 
+	message := values.Get("message") + " From : " + values.Get("email")
+
 	input := &ses.SendEmailInput{
 		Destination: &types.Destination{
 			ToAddresses: []string{
@@ -69,7 +71,7 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 			Body: &types.Body{
 				Text: &types.Content{
 					Charset: aws.String("UTF-8"),
-					Data:    aws.String(values.Get("message")),
+					Data:    aws.String(message),
 				},
 			},
 			Subject: &types.Content{
