@@ -5,15 +5,31 @@ Description: >
 
   Sample SAM Template for portfolio-backend
 
-# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
     Timeout: 5
     MemorySize: 128
 
 Resources:
-  AjayPatelBackendFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+  AjayPatelApiGateway:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      Domain:
+        DomainName: backend.ajaypatel.live
+        CertificateArn: arn:aws:acm:us-east-1:949638458026:certificate/ee910247-1da2-406f-a528-fd7172b534cf
+        EndpointConfiguration: EDGE
+        Route53:
+          HostedZoneId: Z0502293H5TZC2PJ9FFH
+      Cors:
+        AllowMethods: "'POST, GET'"
+        AllowHeaders: "'X-Forwarded-For, Content-Type'"
+        AllowOrigin: "'https://ajaypatel.live'"
+        MaxAge: "'600'"
+        AllowCredentials: true
+
+  AjayPatelFunction:
+    Type: AWS::Serverless::Function
     Metadata:
       BuildMethod: go1.x
     Properties:
@@ -24,10 +40,12 @@ Resources:
         - x86_64
       Events:
         CatchAll:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Type: Api
           Properties:
             Path: /
             Method: POST
+            RestApiId:
+              Ref: AjayPatelApiGateway
       Policies:
         - Statement:
             - Effect: Allow
@@ -35,20 +53,11 @@ Resources:
                 - ses:SendEmail
                 - ses:SendRawEmail
               Resource: "*"
-      Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+      Environment:
         Variables:
           PARAM1: VALUE
 
 Outputs:
-  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
-  # Find out more about other implicit resources you can reference within SAM
-  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-  AjayPatelBackendAPI:
-    Description: "API Gateway endpoint URL for Prod environment for First Function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
-  AjayPatelBackendFunction:
-    Description: "First Lambda Function ARN"
-    Value: !GetAtt AjayPatelBackend.Arn
-  AjayPatelBackendFunctionIamRole:
-    Description: "Implicit IAM Role created for Hello World function"
-    Value: !GetAtt AjayPatelBackendRole.Arn
+  ApiGatewayDomainName:
+    Description: "Custom domain name"
+    Value: !Ref AjayPatelApiGateway.DomainName
