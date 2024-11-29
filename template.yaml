@@ -17,7 +17,7 @@ Resources:
       StageName: Prod
       Domain:
         DomainName: ajaypatel.live
-        CertificateArn: arn:aws:acm:us-east-1:949638458026:certificate/ee910247-1da2-406f-a528-fd7172b534cf
+        CertificateArn: arn:aws:acm:us-east-1:949638458026:certificate/ac7e8ff9-32f5-4e23-bafb-ce53c76dd6f2
         EndpointConfiguration: EDGE
         Route53:
           HostedZoneId: Z0502293H5TZC2PJ9FFH
