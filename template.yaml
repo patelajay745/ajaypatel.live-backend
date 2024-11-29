@@ -16,7 +16,7 @@ Resources:
     Properties:
       StageName: Prod
       Domain:
-        DomainName: backend.ajaypatel.live
+        DomainName: ajaypatel.live
         CertificateArn: arn:aws:acm:us-east-1:949638458026:certificate/ee910247-1da2-406f-a528-fd7172b534cf
         EndpointConfiguration: EDGE
         Route53:
@@ -40,7 +40,7 @@ Resources:
         CatchAll:
           Type: Api
           Properties:
-            Path: /
+            Path: /api/v1/sendEmail
             Method: POST
             RestApiId:
               Ref: AjayPatelApiGateway
